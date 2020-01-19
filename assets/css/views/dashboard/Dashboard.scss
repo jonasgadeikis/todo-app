@@ -1,0 +1,29 @@
+@import '../../colors.scss';
+
+.Dashboard {
+  padding: 20px;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.Dashboard-title {
+  color: $color-title;
+}
+
+.Dashboard-tasks {
+
+}
+
+.Dashboard-task {
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 0 10px 0 $color-shadow;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Dashboard-taskCompleted {
+  text-decoration: line-through;
+}

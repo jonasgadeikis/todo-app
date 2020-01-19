@@ -1,5 +1,5 @@
 <template>
-    <i class="fas fa-cog" />
+    <i class="material-icons">toys</i>
 </template>
 
 <script>

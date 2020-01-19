@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "axios": "^0.19.1",
+        "material-design-icons": "^3.0.1",
         "vue": "^2.6.11",
         "vue-loader": "^15.8.3",
         "vue-router": "^3.1.3",

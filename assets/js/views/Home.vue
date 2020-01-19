@@ -1,13 +1,13 @@
 <template>
-    <h1>Welcome to Vue!</h1>
+    <div></div>
 </template>
 
 <script>
     export default {
-        name: "Home"
+        name: 'Home',
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>

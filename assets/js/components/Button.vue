@@ -3,7 +3,7 @@
         :type="type"
         :class="classes"
         :disabled="disabled"
-        @click="click"
+        @click.prevent="click"
     >
         <slot />
     </button>
@@ -14,7 +14,7 @@
         name: 'Button',
         props: {
             type: String,
-            classes: String,
+            classes: Array,
             disabled: Boolean,
         },
         methods: {
