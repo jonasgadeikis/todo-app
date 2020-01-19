@@ -5,7 +5,7 @@ export default {
         commit('toggleDashboardLoadingState');
         axios.post('/api/completeTask', {
             taskId: payload,
-        }).then(response => {
+        }).then(() => {
             commit('setTaskAsDone', payload);
         }).catch(error => {
             console.log(error);
