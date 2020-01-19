@@ -1,0 +1,49 @@
+@import '../colors.scss';
+
+.Sidebar {
+  height: 100vh;
+  min-width: 300px;
+  max-width: 300px;
+  overflow: hidden;
+  background: linear-gradient($color-primary, $color-secondary);
+}
+
+.Sidebar-userAvatar {
+  height: 150px;
+  width: 150px;
+  background: linear-gradient(20deg, #0000003B, white);
+  border-radius: 50%;
+}
+
+.Sidebar-userName {
+  font-size: 20px;
+}
+
+.Sidebar-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.Sidebar-listItem {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+
+  i {
+    font-size: 18px;
+  }
+
+  &--active {
+    background-color: #f15f79;
+    color: white;
+    pointer-events: none;
+    transition: all 0.3s linear;
+  }
+
+  &:hover {
+    background-color: #f15f79;
+    cursor: pointer;
+    transition: all 0.3s linear;
+  }
+}

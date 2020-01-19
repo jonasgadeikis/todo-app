@@ -1,15 +1,24 @@
 <template>
-    <div>
+    <div class="App-layout">
+        <Sidebar />
         <router-view />
     </div>
 </template>
 
 <script>
+    import Sidebar from './views/Sidebar';
+
     export default {
-        name: "App"
+        name: 'App',
+        components: {
+            Sidebar,
+        }
     }
 </script>
 
 <style scoped>
-
+    .App-layout {
+        display: flex;
+        flex-direction: row;
+    }
 </style>

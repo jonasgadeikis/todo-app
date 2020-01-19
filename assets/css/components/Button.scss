@@ -1,0 +1,59 @@
+@import '../colors.scss';
+
+.Button {
+  border-radius: 5px;
+  padding: 5px 10px;
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+
+  i {
+    font-size: 18px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &--primary {
+    background-color: $color-primary;
+    border: 1px solid $color-primary;
+
+    &:hover {
+      background-color: $color-secondary;
+      transition: all 0.3s linear;
+      border-color: $color-secondary;
+    }
+  }
+
+  &--loading {
+    background-color: $color-success;
+    border: 1px solid $color-success;
+    pointer-events: none;
+  }
+
+  &--success {
+    background-color: $color-success;
+    border: 1px solid $color-success;
+
+    &:hover {
+      color: black;
+      background-color: white;
+      transition: all 0.3s linear;
+      border-color: $color-success;
+    }
+  }
+
+  &--disabled {
+    background-color: #B2459269;
+    border: 1px solid #B2459269;
+    pointer-events: none;
+  }
+
+  &--taskCompleted {
+    color: $color-success;
+    border: none;
+    background-color: transparent;
+  }
+}
