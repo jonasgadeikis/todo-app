@@ -3,7 +3,7 @@ import axios from 'axios';
 export default {
     addNewTask({commit}, payload) {
         commit('toggleTaskLoadingState');
-        axios.post('/api/createTask', {
+        axios.post('/api/task/create', {
             description: payload,
         }).then(response => {
             const data = response.data;

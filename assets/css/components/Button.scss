@@ -38,10 +38,34 @@
     border: 1px solid $color-success;
 
     &:hover {
-      color: black;
+      color: $color-text;
       background-color: white;
       transition: all 0.3s linear;
       border-color: $color-success;
+    }
+
+    &-loading {
+      background-color: $color-success;
+      border: 1px solid $color-success;
+      pointer-events: none;
+    }
+  }
+
+  &--warning {
+    background-color: $color-warning;
+    border: 1px solid $color-warning;
+
+    &:hover {
+      color: $color-text;
+      background-color: white;
+      transition: all 0.3s linear;
+      border-color: $color-warning;
+    }
+
+    &-loading {
+      background-color: $color-warning;
+      border: 1px solid $color-warning;
+      pointer-events: none;
     }
   }
 
@@ -53,6 +77,12 @@
 
   &--taskCompleted {
     color: $color-success;
+    border: none;
+    background-color: transparent;
+  }
+
+  &--taskBlocked {
+    color: $color-warning;
     border: none;
     background-color: transparent;
   }

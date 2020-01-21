@@ -9,19 +9,69 @@
                 class="Dashboard-task"
             >
                 <span>{{ task.name }}</span>
-                <Button
-                    type="button"
-                    :classes="[
-                        'Button',
-                        {'Button--success': !dashboardLoadingState},
-                        {'Button--loading': dashboardLoadingState},
-                    ]"
-                    :disabled="dashboardLoadingState"
-                    @click="taskDone(task.id)"
-                >
-                    <i class="material-icons" v-show="!dashboardLoadingState">check</i>
-                    <Spinner v-show="dashboardLoadingState" />
-                </Button>
+                <div class="Dashboard-taskAction">
+                    <Button
+                        type="button"
+                        :classes="[
+                            'Button',
+                            {'Button--success': !dashboardLoadingState},
+                            {'Button--success-loading': dashboardLoadingState},
+                        ]"
+                        :disabled="dashboardLoadingState"
+                        @click="completeTask(task.id)"
+                    >
+                        <i class="material-icons" v-show="!dashboardLoadingState">check</i>
+                        <Spinner v-show="dashboardLoadingState" />
+                    </Button>
+                    <Button
+                        type="button"
+                        :classes="[
+                            'Button ml-2',
+                            {'Button--warning': !dashboardLoadingState},
+                            {'Button--warning-loading': dashboardLoadingState},
+                        ]"
+                        :disabled="dashboardLoadingState"
+                        @click="blockTask(task.id)"
+                    >
+                        <i class="material-icons" v-show="!dashboardLoadingState">block</i>
+                        <Spinner v-show="dashboardLoadingState" />
+                    </Button>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="Dashboard-title mt-5" v-if="blockedTasks.length">Blocked Tasks</h4>
+        <div class="Dashboard-tasks mt-3">
+            <div
+                v-for="(task, i) in blockedTasks"
+                :key="i"
+                class="Dashboard-task"
+            >
+                <span>{{ task.name }}</span>
+                <div class="Dashboard-taskAction">
+                    <Button
+                        type="button"
+                        :classes="[
+                            'Button',
+                            {'Button--success': !dashboardLoadingState},
+                            {'Button--success-loading': dashboardLoadingState},
+                        ]"
+                        @click="unblockTask(task.id)"
+                    >
+                        <i class="material-icons" v-show="!dashboardLoadingState">undo</i>
+                        <Spinner v-show="dashboardLoadingState" />
+                    </Button>
+                    <Button
+                        type="button"
+                        :classes="[
+                            'Button ml-2',
+                            'Button--taskBlocked',
+                        ]"
+                        :disabled="true"
+                    >
+                        <i class="material-icons">block</i>
+                    </Button>
+                </div>
             </div>
         </div>
 
@@ -65,10 +115,18 @@
         methods: {
             ...mapActions([
                 'setTaskAsDone',
+                'setTaskAsBlocked',
+                'setTaskAsUnblocked',
                 'getTasks',
             ]),
-            taskDone(taskId) {
+            completeTask(taskId) {
                  this.setTaskAsDone(taskId);
+            },
+            blockTask(taskId) {
+                this.setTaskAsBlocked(taskId);
+            },
+            unblockTask(taskId) {
+                this.setTaskAsUnblocked(taskId);
             },
         },
         computed: {
@@ -78,12 +136,17 @@
             ]),
             uncompletedTasks() {
                 return this.tasks.filter(task => {
-                    return !task.completed;
+                    return !task.isCompleted && !task.isBlocked;
                 });
             },
             completedTasks() {
                 return this.tasks.filter(task => {
-                    return task.completed;
+                    return task.isCompleted;
+                });
+            },
+            blockedTasks() {
+                return this.tasks.filter(task => {
+                    return task.isBlocked;
                 });
             },
         },

@@ -9,46 +9,52 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class TaskController
+ * @package App\Controller
+ * @Route("/api/task", name="api_task_")
+ */
 class TaskController extends AbstractController
 {
     /**
-     * @Route("/api/createTask", name="api_create_task")
+     * @Route("/create", name="create")
      * @param Request $request
      * @return JsonResponse
      */
     public function createTask(Request $request)
     {
         $data = json_decode($request->getContent(), true);
-        $em = $this->getDoctrine()->getManager();
-        $service = new TaskService($em);
+        $entityManager = $this->getDoctrine()->getManager();
+        $service = new TaskService($entityManager);
         $response = $service->create($data);
 
-        return new JsonResponse($response);
+        return $this->json($response);
     }
 
     /**
-     * @Route("/api/getTask", name="api_get_task")
+     * @Route("/get", name="get")
      * @param TaskRepository $taskRepository
-     * @return JsonResponse
+     * @return array|string
      */
     public function getTask(TaskRepository $taskRepository)
     {
         $tasks = $taskRepository->findAll();
-        $data = [];
+        $response = [];
 
         foreach ($tasks as $task) {
-            $data[] = [
+            $response[] = [
                 'id' => $task->getId(),
                 'name' => $task->getDescription(),
-                'completed' => $task->getCompleted(),
+                'isCompleted' => $task->getIsCompleted(),
+                'isBlocked' => $task->getIsBlocked(),
             ];
         }
 
-        return new JsonResponse($data);
+        return $this->json($response);
     }
 
     /**
-     * @Route("/api/completeTask", name="api_complete_task")
+     * @Route("/complete", name="complete")
      * @param Request $request
      * @param TaskRepository $taskRepository
      * @return JsonResponse
@@ -56,14 +62,42 @@ class TaskController extends AbstractController
     public function completeTask(Request $request, TaskRepository $taskRepository)
     {
         $data = json_decode($request->getContent(), true);
-        $em = $this->getDoctrine()->getManager();
-        $task = $taskRepository->find($data['taskId']);
+        $entityManager = $this->getDoctrine()->getManager();
+        $service = new TaskService($entityManager);
+        $response = $service->complete($data, $taskRepository);
 
-        $task->setCompleted(true);
-        $em->flush();
+        return $this->json($response);
+    }
 
-        return new JsonResponse([
-            'message' => 'Task is now completed.',
-        ]);
+    /**
+     * @Route("/block", name="block")
+     * @param Request $request
+     * @param TaskRepository $taskRepository
+     * @return JsonResponse
+     */
+    public function blockTask(Request $request, TaskRepository $taskRepository)
+    {
+        $data = json_decode($request->getContent(), true);
+        $entityManager = $this->getDoctrine()->getManager();
+        $service = new TaskService($entityManager);
+        $response = $service->block($data, $taskRepository);
+
+        return $this->json($response);
+    }
+
+    /**
+     * @Route("/unblock", name="unblock")
+     * @param Request $request
+     * @param TaskRepository $taskRepository
+     * @return JsonResponse
+     */
+    public function unblockTask(Request $request, TaskRepository $taskRepository)
+    {
+        $data = json_decode($request->getContent(), true);
+        $entityManager = $this->getDoctrine()->getManager();
+        $service = new TaskService($entityManager);
+        $response = $service->unblock($data, $taskRepository);
+
+        return $this->json($response);
     }
 }

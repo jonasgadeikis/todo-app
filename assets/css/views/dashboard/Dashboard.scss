@@ -24,6 +24,11 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.Dashboard-taskAction {
+  display: flex;
+}
+
 .Dashboard-taskCompleted {
   text-decoration: line-through;
 }

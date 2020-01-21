@@ -24,7 +24,22 @@ class Task
     /**
      * @ORM\Column(type="boolean")
      */
-    private $completed = false;
+    private $isCompleted = false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isBlocked = false;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -43,14 +58,38 @@ class Task
         return $this;
     }
 
-    public function getCompleted(): ?bool
+    public function getIsCompleted(): ?bool
     {
-        return $this->completed;
+        return $this->isCompleted;
     }
 
-    public function setCompleted(bool $completed): self
+    public function setIsCompleted(bool $isCompleted): self
     {
-        $this->completed = $completed;
+        $this->isCompleted = $isCompleted;
+
+        return $this;
+    }
+
+    public function getIsBlocked(): ?bool
+    {
+        return $this->isBlocked;
+    }
+
+    public function setIsBlocked(bool $isBlocked): self
+    {
+        $this->isBlocked = $isBlocked;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
