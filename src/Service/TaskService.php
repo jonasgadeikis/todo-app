@@ -3,15 +3,21 @@
 namespace App\Service;
 
 use App\Entity\Task;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\TaskRepository;
+use Doctrine\Persistence\ObjectManager;
 
 class TaskService
 {
-    private $em;
+    private $entityManager;
 
-    public function __construct(EntityManagerInterface $em)
+    /**
+     * @var TaskRepository
+     */
+    protected $taskRepository;
+
+    public function __construct(ObjectManager $entityManager)
     {
-        $this->em = $em;
+        $this->entityManager = $entityManager;
     }
 
     public function create($data)
@@ -19,12 +25,47 @@ class TaskService
         $task = new Task();
         $task->setDescription($data['description']);
 
-        $em = $this->em;
-        $em->persist($task);
-        $em->flush();
+        $this->entityManager->persist($task);
+        $this->entityManager->flush();
 
         return array(
             'message' => 'Task was created successfully',
+        );
+    }
+
+    public function complete($data, TaskRepository $taskRepository)
+    {
+        $task = $taskRepository->find($data['taskId']);
+        $task->setIsCompleted(true);
+
+        $this->entityManager->flush();
+
+        return array(
+            'message' => 'Task is now completed',
+        );
+    }
+
+    public function block($data, TaskRepository $taskRepository)
+    {
+        $task = $taskRepository->find($data['taskId']);
+        $task->setIsBlocked(true);
+
+        $this->entityManager->flush();
+
+        return array(
+            'message' => 'Task was blocked successfully',
+        );
+    }
+
+    public function unblock($data, TaskRepository $taskRepository)
+    {
+        $task = $taskRepository->find($data['taskId']);
+        $task->setIsBlocked(false);
+
+        $this->entityManager->flush();
+
+        return array(
+            'message' => 'Task was unblocked successfully',
         );
     }
 }
