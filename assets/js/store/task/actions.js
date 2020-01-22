@@ -7,7 +7,6 @@ export default {
             description: payload,
         }).then(response => {
             const data = response.data;
-
             commit('setMessage', data);
         }).catch(error => {
             console.log(error);

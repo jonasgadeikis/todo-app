@@ -4,68 +4,97 @@ namespace App\Service;
 
 use App\Entity\Task;
 use App\Repository\TaskRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ObjectManager;
 
 class TaskService
 {
-    private $entityManager;
+    private $takRepository;
 
     /**
      * @var TaskRepository
      */
     protected $taskRepository;
 
-    public function __construct(ObjectManager $entityManager)
+    public function __construct(TaskRepository $taskRepository)
     {
-        $this->entityManager = $entityManager;
+        $this->taskRepository = $taskRepository;
     }
 
+    /**
+     * @param $data
+     * @return array
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
     public function create($data)
     {
         $task = new Task();
         $task->setDescription($data['description']);
 
-        $this->entityManager->persist($task);
-        $this->entityManager->flush();
-
-        return array(
-            'message' => 'Task was created successfully',
-        );
+        return $this->taskRepository->save($task);
     }
 
-    public function complete($data, TaskRepository $taskRepository)
+    /**
+     * @return array
+     */
+    public function get()
     {
-        $task = $taskRepository->find($data['taskId']);
+        $tasks = $this->taskRepository->findAll();
+        $data = [];
+
+        foreach ($tasks as $task) {
+            $data[] = [
+                'id' => $task->getId(),
+                'name' => $task->getDescription(),
+                'isCompleted' => $task->getIsCompleted(),
+                'isBlocked' => $task->getIsBlocked(),
+            ];
+        }
+
+        return $data;
+    }
+
+    /**
+     * @param $data
+     * @return array
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function complete($data)
+    {
+        $task = $this->taskRepository->find($data['taskId']);
         $task->setIsCompleted(true);
 
-        $this->entityManager->flush();
-
-        return array(
-            'message' => 'Task is now completed',
-        );
+        return $this->taskRepository->save($task);
     }
 
-    public function block($data, TaskRepository $taskRepository)
+    /**
+     * @param $data
+     * @return array
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function block($data)
     {
-        $task = $taskRepository->find($data['taskId']);
+        $task = $this->taskRepository->find($data['taskId']);
         $task->setIsBlocked(true);
 
-        $this->entityManager->flush();
-
-        return array(
-            'message' => 'Task was blocked successfully',
-        );
+        return $this->taskRepository->save($task);
     }
 
-    public function unblock($data, TaskRepository $taskRepository)
+    /**
+     * @param $data
+     * @return array
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function unblock($data)
     {
-        $task = $taskRepository->find($data['taskId']);
+        $task = $this->taskRepository->find($data['taskId']);
         $task->setIsBlocked(false);
 
-        $this->entityManager->flush();
-
-        return array(
-            'message' => 'Task was unblocked successfully',
-        );
+        return $this->taskRepository->save($task);
     }
 }

@@ -41,14 +41,14 @@ export default {
     },
 
     getTasks({commit}) {
+        commit('toggleDashboardLoadingState');
         axios.get('/api/task/get').then(response => {
             const data = response.data;
-
             commit('setTasks', data);
         }).catch(error => {
             console.log(error);
         }).finally(() => {
-
+            commit('toggleDashboardLoadingState');
         });
-    }
+    },
 };

@@ -8,7 +8,7 @@
                 :key="i"
                 class="Dashboard-task"
             >
-                <span>{{ task.name }}</span>
+                <span class="Dashboard-taskName">{{ task.name }}</span>
                 <div class="Dashboard-taskAction">
                     <Button
                         type="button"
@@ -18,7 +18,7 @@
                             {'Button--success-loading': dashboardLoadingState},
                         ]"
                         :disabled="dashboardLoadingState"
-                        @click="completeTask(task.id)"
+                        @click="setTaskAsDone(task.id)"
                     >
                         <i class="material-icons" v-show="!dashboardLoadingState">check</i>
                         <Spinner v-show="dashboardLoadingState" />
@@ -31,7 +31,7 @@
                             {'Button--warning-loading': dashboardLoadingState},
                         ]"
                         :disabled="dashboardLoadingState"
-                        @click="blockTask(task.id)"
+                        @click="setTaskAsBlocked(task.id)"
                     >
                         <i class="material-icons" v-show="!dashboardLoadingState">block</i>
                         <Spinner v-show="dashboardLoadingState" />
@@ -47,7 +47,7 @@
                 :key="i"
                 class="Dashboard-task"
             >
-                <span>{{ task.name }}</span>
+                <span class="Dashboard-taskName">{{ task.name }}</span>
                 <div class="Dashboard-taskAction">
                     <Button
                         type="button"
@@ -56,7 +56,7 @@
                             {'Button--success': !dashboardLoadingState},
                             {'Button--success-loading': dashboardLoadingState},
                         ]"
-                        @click="unblockTask(task.id)"
+                        @click="setTaskAsUnblocked(task.id)"
                     >
                         <i class="material-icons" v-show="!dashboardLoadingState">undo</i>
                         <Spinner v-show="dashboardLoadingState" />
@@ -82,7 +82,7 @@
                 :key="i"
                 class="Dashboard-task"
             >
-                <span class="Dashboard-taskCompleted">{{ task.name }}</span>
+                <span class="Dashboard-taskName Dashboard-taskName--completed">{{ task.name }}</span>
                 <Button
                     type="button"
                     :classes="[
@@ -119,36 +119,14 @@
                 'setTaskAsUnblocked',
                 'getTasks',
             ]),
-            completeTask(taskId) {
-                 this.setTaskAsDone(taskId);
-            },
-            blockTask(taskId) {
-                this.setTaskAsBlocked(taskId);
-            },
-            unblockTask(taskId) {
-                this.setTaskAsUnblocked(taskId);
-            },
         },
         computed: {
             ...mapGetters([
-                'tasks',
+                'completedTasks',
+                'uncompletedTasks',
+                'blockedTasks',
                 'dashboardLoadingState',
             ]),
-            uncompletedTasks() {
-                return this.tasks.filter(task => {
-                    return !task.isCompleted && !task.isBlocked;
-                });
-            },
-            completedTasks() {
-                return this.tasks.filter(task => {
-                    return task.isCompleted;
-                });
-            },
-            blockedTasks() {
-                return this.tasks.filter(task => {
-                    return task.isBlocked;
-                });
-            },
         },
     }
 </script>
@@ -156,7 +134,4 @@
 <style scoped lang="scss">
     @import '../../../css/views/dashboard/Dashboard.scss';
     @import '../../../css/components/Button.scss';
-    span {
-        color: #5A667F;
-    }
 </style>
