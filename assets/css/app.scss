@@ -1,4 +1,10 @@
 @import '~material-design-icons/iconfont/material-icons.css';
+@import 'components/Button.scss';
+@import 'components/Spinner.scss';
+@import 'components/Textarea.scss';
+@import 'views/Sidebar.scss';
+@import 'views/dashboard/Dashboard.scss';
+@import 'views/task/Task.scss';
 
 body {
   height: 100vh;

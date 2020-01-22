@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default {
-    setTaskAsDone({commit}, payload) {
+    completeTask({commit}, payload) {
         commit('toggleDashboardLoadingState');
         axios.post('/api/task/complete', {
             taskId: payload,
@@ -14,7 +14,7 @@ export default {
         });
     },
 
-    setTaskAsBlocked({commit}, payload) {
+    blockTask({commit}, payload) {
         commit('toggleDashboardLoadingState');
         axios.post('/api/task/block', {
             taskId: payload,
@@ -27,7 +27,7 @@ export default {
         });
     },
 
-    setTaskAsUnblocked({commit}, payload) {
+    unblockTask({commit}, payload) {
         commit('toggleDashboardLoadingState');
         axios.post('/api/task/unblock', {
             taskId: payload,
@@ -40,7 +40,7 @@ export default {
         });
     },
 
-    getTasks({commit}) {
+    getTask({commit}) {
         commit('toggleDashboardLoadingState');
         axios.get('/api/task/get').then(response => {
             const data = response.data;
