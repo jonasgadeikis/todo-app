@@ -7,9 +7,9 @@ export default {
             value: '/dashboard',
         },
         {
-            name: 'Add Task',
+            name: 'Create Task',
             icon: 'add',
-            value: '/task',
+            value: '/create',
         },
         // {
         //     name: 'Search',

@@ -8,7 +8,6 @@
             :model.sync="description"
         />
         <Button
-            type="button"
             :classes="[
                 'Button mt-3',
                 {'Button--primary': !taskLoadingState },
@@ -32,7 +31,7 @@
     import Spinner from '../../components/Spinner';
 
     export default {
-        name: 'Task',
+        name: 'Create',
         components: {
             Button,
             Textarea,
