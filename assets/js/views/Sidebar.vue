@@ -62,7 +62,3 @@
         },
     }
 </script>
-
-<style scoped lang="scss">
-    @import '../../../assets/css/views/Sidebar.scss';
-</style>

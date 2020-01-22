@@ -18,7 +18,7 @@
                             {'Button--success-loading': dashboardLoadingState},
                         ]"
                         :disabled="dashboardLoadingState"
-                        @click="setTaskAsDone(task.id)"
+                        @click="completetask(task.id)"
                     >
                         <i class="material-icons" v-show="!dashboardLoadingState">check</i>
                         <Spinner v-show="dashboardLoadingState" />
@@ -31,7 +31,7 @@
                             {'Button--warning-loading': dashboardLoadingState},
                         ]"
                         :disabled="dashboardLoadingState"
-                        @click="setTaskAsBlocked(task.id)"
+                        @click="blockTask(task.id)"
                     >
                         <i class="material-icons" v-show="!dashboardLoadingState">block</i>
                         <Spinner v-show="dashboardLoadingState" />
@@ -56,7 +56,7 @@
                             {'Button--success': !dashboardLoadingState},
                             {'Button--success-loading': dashboardLoadingState},
                         ]"
-                        @click="setTaskAsUnblocked(task.id)"
+                        @click="unblockTask(task.id)"
                     >
                         <i class="material-icons" v-show="!dashboardLoadingState">undo</i>
                         <Spinner v-show="dashboardLoadingState" />
@@ -110,14 +110,14 @@
             Spinner,
         },
         mounted() {
-            this.getTasks();
+            this.getTask();
         },
         methods: {
             ...mapActions([
-                'setTaskAsDone',
-                'setTaskAsBlocked',
-                'setTaskAsUnblocked',
-                'getTasks',
+                'completeTask',
+                'blockTask',
+                'unblockTask',
+                'getTask',
             ]),
         },
         computed: {
@@ -130,8 +130,3 @@
         },
     }
 </script>
-
-<style scoped lang="scss">
-    @import '../../../css/views/dashboard/Dashboard.scss';
-    @import '../../../css/components/Button.scss';
-</style>

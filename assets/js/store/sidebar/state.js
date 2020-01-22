@@ -22,6 +22,11 @@ export default {
         //     value: '',
         // },
         // {
+        //     name: 'Settings',
+        //     icon: 'build',
+        //     value: '',
+        // },
+        // {
         //     name: 'Logout',
         //     icon: 'lock',
         //     value: '',

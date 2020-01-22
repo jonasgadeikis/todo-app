@@ -60,8 +60,3 @@
         },
     }
 </script>
-
-<style scoped lang="scss">
-    @import '../../../css/components/Button.scss';
-    @import '../../../css/views/task/Task.scss';
-</style>
