@@ -1,6 +1,6 @@
 <template>
     <button
-        :type="type"
+        type="button"
         :class="classes"
         :disabled="disabled"
         @click.prevent="click"
@@ -13,7 +13,6 @@
     export default {
         name: 'Button',
         props: {
-            type: String,
             classes: Array,
             disabled: Boolean,
         },

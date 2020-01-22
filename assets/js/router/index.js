@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home';
 import Dashboard from '../views/dashboard/Dashboard';
-import Task from '../views/task/Task';
+import Create from '../views/create/Create';
 
 Vue.use(VueRouter);
 
@@ -16,8 +16,8 @@ const routes = [
         component: Dashboard,
     },
     {
-        path: '/task',
-        component: Task,
+        path: '/create',
+        component: Create,
     },
 ];
 
