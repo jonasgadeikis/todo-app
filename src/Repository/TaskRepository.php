@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Task;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 
 /**
  * @method Task|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,6 +21,21 @@ class TaskRepository extends ServiceEntityRepository
         parent::__construct($registry, Task::class);
     }
 
+    /**
+     * @param Task $task
+     * @return array
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function save(Task $task)
+    {
+        $this->getEntityManager()->persist($task);
+        $this->getEntityManager()->flush();
+
+        return array(
+            'message' => 'Action was successful',
+        );
+    }
     // /**
     //  * @return Task[] Returns an array of Task objects
     //  */

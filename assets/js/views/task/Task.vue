@@ -15,7 +15,7 @@
                 { 'Button--disabled': taskLoadingState },
             ]"
             :disabled="taskLoadingState"
-            @click="createTask(description)"
+            @click="addNewTask(description)"
         >
             <Spinner v-show="taskLoadingState" />
             <i class="material-icons" v-show="!taskLoadingState">check</i>
@@ -51,10 +51,6 @@
                 'addNewTask',
                 'resetMessage',
             ]),
-
-            createTask(description) {
-                this.addNewTask(description);
-            },
         },
         computed: {
             ...mapGetters([

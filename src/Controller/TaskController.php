@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-use App\Repository\TaskRepository;
 use App\Service\TaskService;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,36 +20,27 @@ class TaskController extends AbstractController
     /**
      * @Route("/create", name="create")
      * @param Request $request
+     * @param TaskService $taskService
      * @return JsonResponse
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
-    public function createTask(Request $request)
+    public function createTask(Request $request, TaskService $taskService)
     {
         $data = json_decode($request->getContent(), true);
-        $entityManager = $this->getDoctrine()->getManager();
-        $service = new TaskService($entityManager);
-        $response = $service->create($data);
+        $response = $taskService->create($data);
 
         return $this->json($response);
     }
 
     /**
      * @Route("/get", name="get")
-     * @param TaskRepository $taskRepository
+     * @param TaskService $taskService
      * @return array|string
      */
-    public function getTask(TaskRepository $taskRepository)
+    public function getTask(TaskService $taskService)
     {
-        $tasks = $taskRepository->findAll();
-        $response = [];
-
-        foreach ($tasks as $task) {
-            $response[] = [
-                'id' => $task->getId(),
-                'name' => $task->getDescription(),
-                'isCompleted' => $task->getIsCompleted(),
-                'isBlocked' => $task->getIsBlocked(),
-            ];
-        }
+        $response = $taskService->get();
 
         return $this->json($response);
     }
@@ -56,15 +48,15 @@ class TaskController extends AbstractController
     /**
      * @Route("/complete", name="complete")
      * @param Request $request
-     * @param TaskRepository $taskRepository
+     * @param TaskService $taskService
      * @return JsonResponse
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
-    public function completeTask(Request $request, TaskRepository $taskRepository)
+    public function completeTask(Request $request, TaskService $taskService)
     {
         $data = json_decode($request->getContent(), true);
-        $entityManager = $this->getDoctrine()->getManager();
-        $service = new TaskService($entityManager);
-        $response = $service->complete($data, $taskRepository);
+        $response = $taskService->complete($data);
 
         return $this->json($response);
     }
@@ -72,15 +64,15 @@ class TaskController extends AbstractController
     /**
      * @Route("/block", name="block")
      * @param Request $request
-     * @param TaskRepository $taskRepository
+     * @param TaskService $taskService
      * @return JsonResponse
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
-    public function blockTask(Request $request, TaskRepository $taskRepository)
+    public function blockTask(Request $request, TaskService $taskService)
     {
         $data = json_decode($request->getContent(), true);
-        $entityManager = $this->getDoctrine()->getManager();
-        $service = new TaskService($entityManager);
-        $response = $service->block($data, $taskRepository);
+        $response = $taskService->block($data);
 
         return $this->json($response);
     }
@@ -88,15 +80,15 @@ class TaskController extends AbstractController
     /**
      * @Route("/unblock", name="unblock")
      * @param Request $request
-     * @param TaskRepository $taskRepository
+     * @param TaskService $taskService
      * @return JsonResponse
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
-    public function unblockTask(Request $request, TaskRepository $taskRepository)
+    public function unblockTask(Request $request, TaskService $taskService)
     {
         $data = json_decode($request->getContent(), true);
-        $entityManager = $this->getDoctrine()->getManager();
-        $service = new TaskService($entityManager);
-        $response = $service->unblock($data, $taskRepository);
+        $response = $taskService->unblock($data);
 
         return $this->json($response);
     }
