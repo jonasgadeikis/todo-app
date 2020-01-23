@@ -92,4 +92,20 @@ class TaskController extends AbstractController
 
         return $this->json($response);
     }
+
+    /**
+     * @Route("/start", name="start")
+     * @param Request $request
+     * @param TaskService $taskService
+     * @return JsonResponse
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function startTask(Request $request, TaskService $taskService)
+    {
+        $data = json_decode($request->getContent(), true);
+        $response = $taskService->start($data);
+
+        return $this->json($response);
+    }
 }

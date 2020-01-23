@@ -24,6 +24,11 @@ class Task
     /**
      * @ORM\Column(type="boolean")
      */
+    private $isInProgress = false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
     private $isCompleted = false;
 
     /**
@@ -90,6 +95,18 @@ class Task
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getIsInProgress(): ?bool
+    {
+        return $this->isInProgress;
+    }
+
+    public function setIsInProgress(bool $isInProgress): self
+    {
+        $this->isInProgress = $isInProgress;
 
         return $this;
     }

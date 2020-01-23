@@ -40,6 +40,19 @@ export default {
         });
     },
 
+    startTask({commit}, payload) {
+        commit('toggleDashboardLoadingState');
+        axios.post('/api/task/start', {
+            taskId: payload,
+        }).then(() => {
+            commit('setTaskAsStarted', payload);
+        }).catch(error => {
+            console.log(error);
+        }).finally(() => {
+            commit('toggleDashboardLoadingState');
+        });
+    },
+
     getTask({commit}) {
         commit('toggleDashboardLoadingState');
         axios.get('/api/task/get').then(response => {

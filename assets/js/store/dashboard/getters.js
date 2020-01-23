@@ -7,9 +7,15 @@ export default {
         return state.dashboardLoadingState;
     },
 
-    uncompletedTasks(state) {
+    toDoTasks(state) {
         return state.tasks.filter(task => {
-            return !task.isCompleted && !task.isBlocked;
+            return !task.isInProgress && !task.isCompleted && !task.isBlocked;
+        });
+    },
+
+    inProgressTasks(state) {
+        return state.tasks.filter(task => {
+            return task.isInProgress;
         });
     },
 

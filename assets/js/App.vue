@@ -12,13 +12,6 @@
         name: 'App',
         components: {
             Sidebar,
-        }
+        },
     }
 </script>
-
-<style scoped>
-    .App-layout {
-        display: flex;
-        flex-direction: row;
-    }
-</style>
