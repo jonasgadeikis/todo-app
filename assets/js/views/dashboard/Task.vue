@@ -1,7 +1,10 @@
 <template>
-    <div class="Dashboard-task">
-        <span class="Dashboard-taskName">{{ name }}</span>
-        <slot />
+    <div class="Task">
+        <div class="Task-content">
+            <span class="Dashboard-taskName">{{ name }}</span>
+            <slot name="state" />
+        </div>
+        <slot name="action" />
     </div>
 </template>
 

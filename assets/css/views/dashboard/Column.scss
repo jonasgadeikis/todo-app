@@ -1,0 +1,19 @@
+@import '../../colors.scss';
+
+.Column {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  margin: 0 10px;
+}
+
+.Column-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: $color-title;
+
+  h6 {
+    margin: 0;
+  }
+}

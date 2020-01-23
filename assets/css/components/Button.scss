@@ -79,11 +79,13 @@
     color: $color-success;
     border: none;
     background-color: transparent;
+    padding: 0;
   }
 
   &--taskBlocked {
     color: $color-warning;
     border: none;
     background-color: transparent;
+    padding: 0;
   }
 }

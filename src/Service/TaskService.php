@@ -6,16 +6,13 @@ use App\Entity\Task;
 use App\Repository\TaskRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use Doctrine\Persistence\ObjectManager;
 
 class TaskService
 {
-    private $takRepository;
-
     /**
      * @var TaskRepository
      */
-    protected $taskRepository;
+    private $taskRepository;
 
     public function __construct(TaskRepository $taskRepository)
     {
@@ -48,6 +45,7 @@ class TaskService
             $data[] = [
                 'id' => $task->getId(),
                 'name' => $task->getDescription(),
+                'isInProgress' => $task->getIsInProgress(),
                 'isCompleted' => $task->getIsCompleted(),
                 'isBlocked' => $task->getIsBlocked(),
             ];
@@ -66,6 +64,7 @@ class TaskService
     {
         $task = $this->taskRepository->find($data['taskId']);
         $task->setIsCompleted(true);
+        $task->setIsInProgress(false);
 
         return $this->taskRepository->save($task);
     }
@@ -80,6 +79,7 @@ class TaskService
     {
         $task = $this->taskRepository->find($data['taskId']);
         $task->setIsBlocked(true);
+        $task->setIsInProgress(false);
 
         return $this->taskRepository->save($task);
     }
@@ -94,6 +94,20 @@ class TaskService
     {
         $task = $this->taskRepository->find($data['taskId']);
         $task->setIsBlocked(false);
+        $task->setIsInProgress(false);
+
+        return $this->taskRepository->save($task);
+    }
+
+    /**
+     * @param $data
+     * @return array
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function start($data) {
+        $task = $this->taskRepository->find($data['taskId']);
+        $task->setIsInProgress(true);
 
         return $this->taskRepository->save($task);
     }

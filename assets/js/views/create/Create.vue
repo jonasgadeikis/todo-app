@@ -1,5 +1,5 @@
 <template>
-    <div class="Task pt-5">
+    <div class="Create pt-5">
         <h1 class="Task-title mb-5">New Task</h1>
         <Textarea
             placeholder="..."

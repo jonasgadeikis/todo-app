@@ -2,26 +2,45 @@
     <div class="Dashboard pt-5">
         <h1 class="Dashboard-title">Dashboard</h1>
 
-        <Column
-            title="Ongoing Tasks"
-            :tasks="uncompletedTasks"
-            :loading="dashboardLoadingState"
-            @complete="completeTask($event)"
-            @block="blockTask($event)"
-        />
+        <div class="Dashboard-columns">
+            <Column
+                title="To Do"
+                :state="false"
+                :tasks="toDoTasks"
+                :loading="dashboardLoadingState"
+                @start="startTask($event)"
+            />
 
-        <Column
-            title="Blocked Tasks"
-            :tasks="blockedTasks"
-            :loading="dashboardLoadingState"
-            @unblock="unblockTask($event)"
-        />
+            <Column
+                title="In Progress"
+                :state="true"
+                state-icon="check"
+                state-class="Button--taskBlocked"
+                :tasks="inProgressTasks"
+                :loading="dashboardLoadingState"
+                @complete="completeTask($event)"
+                @block="blockTask($event)"
+            />
 
-        <Column
-            title="Completed Tasks"
-            :tasks="completedTasks"
-            :loading="dashboardLoadingState"
-        />
+            <Column
+                title="Completed"
+                :state="true"
+                state-icon="check"
+                state-class="Button--taskCompleted"
+                :tasks="completedTasks"
+                :loading="dashboardLoadingState"
+            />
+
+            <Column
+                title="Blocked"
+                :state="true"
+                state-icon="block"
+                state-class="Button--taskBlocked"
+                :tasks="blockedTasks"
+                :loading="dashboardLoadingState"
+                @unblock="unblockTask($event)"
+            />
+        </div>
     </div>
 </template>
 
@@ -43,6 +62,7 @@
         },
         methods: {
             ...mapActions([
+                'startTask',
                 'completeTask',
                 'blockTask',
                 'unblockTask',
@@ -51,8 +71,9 @@
         },
         computed: {
             ...mapGetters([
+                'toDoTasks',
+                'inProgressTasks',
                 'completedTasks',
-                'uncompletedTasks',
                 'blockedTasks',
                 'dashboardLoadingState',
             ]),
