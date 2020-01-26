@@ -16,18 +16,16 @@
                 :task="task"
                 @dragStarted="dragStarted($event)"
             >
-                <template v-slot:state>
-                    <Button
-                        v-show="state"
-                        :classes="[
-                            'Button',
-                            stateClass,
-                        ]"
-                        :disabled="true"
-                    >
-                        <i class="material-icons">{{ stateIcon }}</i>
-                    </Button>
-                </template>
+                <Button
+                    v-show="state"
+                    :classes="[
+                        'Button',
+                        stateClass,
+                    ]"
+                    :disabled="true"
+                >
+                    <i class="material-icons">{{ stateIcon }}</i>
+                </Button>
             </Task>
         </div>
     </div>

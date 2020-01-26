@@ -7,7 +7,7 @@
     >
         <div class="Task-content">
             <span class="Dashboard-taskName">{{ task.name }}</span>
-            <slot name="state" />
+            <slot />
             <div class="Task-loading" v-show="dashboardLoadingState">
                 <Spinner />
             </div>
@@ -29,7 +29,7 @@
         },
         methods: {
             dragStart(e) {
-                this.$emit('dragStarted', e)
+                this.$emit('dragStarted', e);
             },
         },
         computed: {
