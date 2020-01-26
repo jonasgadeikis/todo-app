@@ -23,8 +23,13 @@ export default {
         },
         {
             name: 'completed',
-            available: [],
-            unavailable: [],
+            available: [
+                'toDo',
+            ],
+            unavailable: [
+                'inProgress',
+                'blocked',
+            ],
         },
         {
             name: 'blocked',

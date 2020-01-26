@@ -9,6 +9,7 @@
 @import 'views/create/Create.scss';
 
 .App-layout {
-  height: 100vh;
+  min-height: 100vh;
+  max-height: 100%;
   display: flex;
 }
