@@ -8,11 +8,7 @@
 @import 'views/dashboard/Task.scss';
 @import 'views/create/Create.scss';
 
-body {
-  height: 100vh;
-  overflow: hidden;
-}
-
 .App-layout {
+  height: 100vh;
   display: flex;
 }

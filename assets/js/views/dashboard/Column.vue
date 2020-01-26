@@ -1,14 +1,20 @@
 <template>
-    <div class="Column">
-        <h4 class="Column-title mt-5">
+    <div
+        :id="id"
+        class="Column"
+        @dragover="allowDrop($event)"
+        @drop="drop($event)"
+    >
+        <h4 class="Column-title">
             <span>{{ title }}</span>
             <h6>{{ tasks.length }}</h6>
         </h4>
-        <div class="Dashboard-tasks">
+        <div class="Column-tasks">
             <Task
                 v-for="(task, i) in tasks"
                 :key="i"
-                :name="task.name"
+                :task="task"
+                @dragStarted="dragStarted($event)"
             >
                 <template v-slot:state>
                     <Button
@@ -22,68 +28,13 @@
                         <i class="material-icons">{{ stateIcon }}</i>
                     </Button>
                 </template>
-                <template v-slot:action>
-                    <div class="Dashboard-taskAction" v-if="title === 'In Progress'">
-                        <Button
-                            :classes="[
-                                'Button',
-                                {'Button--success': !loading},
-                                {'Button--success-loading': loading},
-                            ]"
-                            :disabled="loading"
-                            @click="$emit('complete', task.id)"
-                        >
-                            <i class="material-icons" v-show="!loading">check</i>
-                            <Spinner v-show="loading" />
-                        </Button>
-                        <Button
-                            :classes="[
-                                'Button ml-2',
-                                {'Button--warning': !loading},
-                                {'Button--warning-loading': loading},
-                            ]"
-                            :disabled="loading"
-                            @click="$emit('block', task.id)"
-                        >
-                            <i class="material-icons" v-show="!loading">block</i>
-                            <Spinner v-show="loading" />
-                        </Button>
-                    </div>
-                    <div class="Dashboard-taskAction" v-if="title === 'Blocked'">
-                        <Button
-                            :classes="[
-                                'Button',
-                                {'Button--success': !loading},
-                                {'Button--success-loading': loading},
-                            ]"
-                            :disabled="loading"
-                            @click="$emit('unblock', task.id)"
-                        >
-                            <i class="material-icons" v-show="!loading">undo</i>
-                            <Spinner v-show="loading" />
-                        </Button>
-                    </div>
-                    <div class="Dashboard-taskAction" v-if="title === 'To Do'">
-                        <Button
-                            :classes="[
-                                'Button',
-                                {'Button--success': !loading},
-                                {'Button--success-loading': loading},
-                            ]"
-                            :disabled="loading"
-                            @click="$emit('start', task.id)"
-                        >
-                            <i class="material-icons" v-show="!loading">play_arrow</i>
-                            <Spinner v-show="loading" />
-                        </Button>
-                    </div>
-                </template>
             </Task>
         </div>
     </div>
 </template>
 
 <script>
+    import { mapActions, mapGetters } from 'vuex';
     import Button from '../../components/Button';
     import Spinner from '../../components/Spinner';
     import Task from './Task';
@@ -96,12 +47,66 @@
         },
         name: 'Column',
         props: {
+            id: String,
             state: Boolean,
             stateIcon: String,
             stateClass: String,
             loading: Boolean,
             tasks: Array,
             title: String,
+        },
+        methods: {
+            ...mapActions([
+                'dragTask',
+            ]),
+            dragStarted(e) {
+                const column = this.columns.find(column => {
+                    return column.name === this.id;
+                });
+                column.unavailable.forEach(column => {
+                    document.getElementById(column).style.background = '#f15f7945';
+                });
+                column.available.forEach(column => {
+                    document.getElementById(column).style.background = '#1dd1a175';
+                });
+
+                const task = {
+                    id: e.target.id,
+                    start: this.id,
+                };
+                this.dragTask(task);
+            },
+            allowDrop(e) {
+                e.preventDefault();
+            },
+            drop(e) {
+                e.preventDefault();
+
+                this.allColumns.forEach(column => {
+                    document.getElementById(column).style.background = 'white';
+                });
+
+                if (this.id === this.draggedTask.start) {
+                    return;
+                }
+
+                if (this.id === 'completed' && this.draggedTask.start === 'inProgress') {
+                    this.$emit('complete', Number(this.draggedTask.id));
+                } else if (this.id === 'inProgress' && this.draggedTask.start === 'toDo') {
+                    this.$emit('start', Number(this.draggedTask.id));
+                } else if (this.id === 'blocked' && this.draggedTask.start === 'inProgress') {
+                    this.$emit('block', Number(this.draggedTask.id));
+                } else if (this.id === 'inProgress' && this.draggedTask.start === 'blocked') {
+                    this.$emit('unblock', Number(this.draggedTask.id));
+                }
+            },
+        },
+        computed: {
+            ...mapGetters([
+                'columns',
+                'allColumns',
+                'draggedTask',
+            ]),
         },
     }
 </script>

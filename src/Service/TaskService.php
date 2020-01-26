@@ -94,7 +94,7 @@ class TaskService
     {
         $task = $this->taskRepository->find($data['taskId']);
         $task->setIsBlocked(false);
-        $task->setIsInProgress(false);
+        $task->setIsInProgress(true);
 
         return $this->taskRepository->save($task);
     }
