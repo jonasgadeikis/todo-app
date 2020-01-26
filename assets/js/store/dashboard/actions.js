@@ -64,4 +64,8 @@ export default {
             commit('toggleDashboardLoadingState');
         });
     },
+
+    dragTask({commit}, payload) {
+        commit('setDraggedTask', payload);
+    },
 };

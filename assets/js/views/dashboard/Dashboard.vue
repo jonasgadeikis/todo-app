@@ -2,43 +2,47 @@
     <div class="Dashboard pt-5">
         <h1 class="Dashboard-title">Dashboard</h1>
 
-        <div class="Dashboard-columns">
+        <div class="Dashboard-columns mt-5">
             <Column
+                id="toDo"
                 title="To Do"
                 :state="false"
                 :tasks="toDoTasks"
                 :loading="dashboardLoadingState"
-                @start="startTask($event)"
             />
 
             <Column
+                id="inProgress"
                 title="In Progress"
                 :state="true"
                 state-icon="check"
                 state-class="Button--taskBlocked"
                 :tasks="inProgressTasks"
                 :loading="dashboardLoadingState"
-                @complete="completeTask($event)"
-                @block="blockTask($event)"
+                @start="startTask($event)"
+                @unblock="unblockTask($event)"
             />
 
             <Column
+                id="completed"
                 title="Completed"
                 :state="true"
                 state-icon="check"
                 state-class="Button--taskCompleted"
                 :tasks="completedTasks"
                 :loading="dashboardLoadingState"
+                @complete="completeTask($event)"
             />
 
             <Column
+                id="blocked"
                 title="Blocked"
                 :state="true"
                 state-icon="block"
                 state-class="Button--taskBlocked"
                 :tasks="blockedTasks"
                 :loading="dashboardLoadingState"
-                @unblock="unblockTask($event)"
+                @block="blockTask($event)"
             />
         </div>
     </div>

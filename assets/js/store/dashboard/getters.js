@@ -3,6 +3,14 @@ export default {
         return state.tasks;
     },
 
+    columns(state) {
+        return state.columns;
+    },
+
+    allColumns(state) {
+        return state.allColumns;
+    },
+
     dashboardLoadingState(state) {
         return state.dashboardLoadingState;
     },
@@ -29,5 +37,9 @@ export default {
         return state.tasks.filter(task => {
             return task.isBlocked;
         });
+    },
+
+    draggedTask(state) {
+        return state.draggedTask;
     },
 };

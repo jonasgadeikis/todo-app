@@ -35,7 +35,7 @@ export default {
         });
 
         state.tasks.splice(state.tasks.indexOf(task), 1);
-        task.isInProgress = false;
+        task.isInProgress = true;
         task.isBlocked = false;
         state.tasks.push(task);
     },
@@ -48,5 +48,9 @@ export default {
         state.tasks.splice(state.tasks.indexOf(task), 1);
         task.isInProgress = true;
         state.tasks.push(task);
+    },
+
+    setDraggedTask(state, payload) {
+        state.draggedTask = payload;
     },
 };
