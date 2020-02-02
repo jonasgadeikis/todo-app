@@ -4,7 +4,8 @@ export default {
     addNewTask({commit}, payload) {
         commit('toggleLoadingState');
         axios.post('/api/task/create', {
-            description: payload,
+            description: payload.description,
+            priority: payload.priority,
         }).then(response => {
             commit('setMessage', response.data);
         }).catch(error => {

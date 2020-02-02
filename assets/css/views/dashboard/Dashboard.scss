@@ -24,14 +24,6 @@
   flex-grow: 1;
 }
 
-.Dashboard-taskName {
-  color: #5A667F;
-
-  &--completed {
-    text-decoration: line-through;
-  }
-}
-
 .Dashboard-taskAction {
   display: flex;
   align-items: flex-end;

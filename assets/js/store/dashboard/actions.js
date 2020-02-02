@@ -57,8 +57,7 @@ export default {
         commit('toggleLoadingState');
         setTimeout(() => {
             axios.get('/api/task/get').then(response => {
-                const data = response.data;
-                commit('setTasks', data);
+                commit('setTasks', response.data);
             }).catch(error => {
                 console.log(error);
             }).finally(() => {
