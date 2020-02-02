@@ -53,6 +53,7 @@
         methods: {
             ...mapActions([
                 'dragTask',
+                'resetColumnsColor',
             ]),
             dragStarted(e) {
                 const column = this.columns.find(column => {
@@ -77,9 +78,7 @@
             drop(e) {
                 e.preventDefault();
 
-                this.allColumns.forEach(column => {
-                    document.getElementById(column).style.background = 'white';
-                });
+                this.resetColumnsColor();
 
                 if (this.id === this.draggedTask.start) {
                     return;

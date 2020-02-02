@@ -11,10 +11,6 @@ export default {
         return state.allColumns;
     },
 
-    dashboardLoadingState(state) {
-        return state.dashboardLoadingState;
-    },
-
     toDoTasks(state) {
         return state.tasks.filter(task => {
             return !task.isInProgress && !task.isCompleted && !task.isBlocked;

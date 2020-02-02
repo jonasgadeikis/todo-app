@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default {
     completeTask({commit}, payload) {
-        commit('toggleDashboardLoadingState');
+        commit('toggleLoadingState');
         axios.post('/api/task/complete', {
             taskId: payload,
         }).then(() => {
@@ -10,12 +10,12 @@ export default {
         }).catch(error => {
             console.log(error);
         }).finally(() => {
-            commit('toggleDashboardLoadingState');
+            commit('toggleLoadingState');
         });
     },
 
     blockTask({commit}, payload) {
-        commit('toggleDashboardLoadingState');
+        commit('toggleLoadingState');
         axios.post('/api/task/block', {
             taskId: payload,
         }).then(() => {
@@ -23,12 +23,12 @@ export default {
         }).catch(error => {
             console.log(error);
         }).finally(() => {
-            commit('toggleDashboardLoadingState');
+            commit('toggleLoadingState');
         });
     },
 
     unblockTask({commit}, payload) {
-        commit('toggleDashboardLoadingState');
+        commit('toggleLoadingState');
         axios.post('/api/task/unblock', {
             taskId: payload,
         }).then(() => {
@@ -36,12 +36,12 @@ export default {
         }).catch(error => {
             console.log(error);
         }).finally(() => {
-            commit('toggleDashboardLoadingState');
+            commit('toggleLoadingState');
         });
     },
 
     startTask({commit}, payload) {
-        commit('toggleDashboardLoadingState');
+        commit('toggleLoadingState');
         axios.post('/api/task/start', {
             taskId: payload,
         }).then(() => {
@@ -49,23 +49,29 @@ export default {
         }).catch(error => {
             console.log(error);
         }).finally(() => {
-            commit('toggleDashboardLoadingState');
+            commit('toggleLoadingState');
         });
     },
 
     getTask({commit}) {
-        commit('toggleDashboardLoadingState');
-        axios.get('/api/task/get').then(response => {
-            const data = response.data;
-            commit('setTasks', data);
-        }).catch(error => {
-            console.log(error);
-        }).finally(() => {
-            commit('toggleDashboardLoadingState');
-        });
+        commit('toggleLoadingState');
+        setTimeout(() => {
+            axios.get('/api/task/get').then(response => {
+                const data = response.data;
+                commit('setTasks', data);
+            }).catch(error => {
+                console.log(error);
+            }).finally(() => {
+                commit('toggleLoadingState');
+            });
+        }, 2000);
     },
 
     dragTask({commit}, payload) {
         commit('setDraggedTask', payload);
+    },
+
+    resetColumnsColor({commit}) {
+        commit('resetColumnsColor');
     },
 };

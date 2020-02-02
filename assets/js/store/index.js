@@ -1,15 +1,30 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import Authentication from './authentication/index';
 import Dashboard from './dashboard/index';
-import Task from './task/index';
+import Create from './create/index';
 import Sidebar from './sidebar/index';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     modules: {
+        Authentication,
         Dashboard,
         Sidebar,
-        Task,
+        Create,
+    },
+    state: {
+        loadingState: false,
+    },
+    getters: {
+        loadingState(state) {
+            return state.loadingState;
+        },
+    },
+    mutations: {
+        toggleLoadingState(state) {
+            state.loadingState = !state.loadingState;
+        },
     },
 });

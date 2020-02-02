@@ -2,7 +2,10 @@
     <div class="Dashboard pt-5">
         <h1 class="Dashboard-title">Dashboard</h1>
 
-        <div class="Dashboard-columns mt-5">
+        <div
+            class="Dashboard-columns mt-5"
+            @mouseleave="resetColumnsColor($event)"
+        >
             <Column
                 id="toDo"
                 title="To Do"
@@ -40,9 +43,7 @@
             />
         </div>
 
-        <div class="Dashboard-loading" v-show="dashboardLoadingState">
-            <Spinner />
-        </div>
+        <Spinner :loading="loadingState" />
     </div>
 </template>
 
@@ -69,6 +70,7 @@
                 'blockTask',
                 'unblockTask',
                 'getTask',
+                'resetColumnsColor',
             ]),
         },
         computed: {
@@ -77,7 +79,7 @@
                 'inProgressTasks',
                 'completedTasks',
                 'blockedTasks',
-                'dashboardLoadingState',
+                'loadingState',
             ]),
         },
     }

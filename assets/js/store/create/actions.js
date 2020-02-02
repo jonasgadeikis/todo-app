@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default {
     addNewTask({commit}, payload) {
-        commit('toggleTaskLoadingState');
+        commit('toggleLoadingState');
         axios.post('/api/task/create', {
             description: payload,
         }).then(response => {
@@ -10,7 +10,7 @@ export default {
         }).catch(error => {
             console.log(error);
         }).finally(() => {
-            commit('toggleTaskLoadingState');
+            commit('toggleLoadingState');
         });
     },
 

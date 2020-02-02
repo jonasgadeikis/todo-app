@@ -1,6 +1,5 @@
 export default {
     tasks: [],
-    dashboardLoadingState: false,
     draggedTask: null,
     columns: [
         {
