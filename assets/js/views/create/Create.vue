@@ -10,17 +10,16 @@
         <Button
             :classes="[
                 'Button mt-3',
-                {'Button--primary': !taskLoadingState },
-                { 'Button--disabled': taskLoadingState },
+                'Button--primary',
             ]"
-            :disabled="taskLoadingState"
             @click="addNewTask(description)"
         >
-            <Spinner v-show="taskLoadingState" />
-            <i class="material-icons" v-show="!taskLoadingState">check</i>
+            <i class="material-icons">check</i>
             <span class="ml-2">Save</span>
         </Button>
         <div class="Task-message--success mt-3">{{ message }}</div>
+
+        <Spinner :loading="loadingState" />
     </div>
 </template>
 
@@ -53,7 +52,7 @@
         },
         computed: {
             ...mapGetters([
-                'taskLoadingState',
+                'loadingState',
                 'message',
             ]),
         },

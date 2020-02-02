@@ -3,10 +3,6 @@ export default {
         state.tasks = payload;
     },
 
-    toggleDashboardLoadingState(state) {
-        state.dashboardLoadingState = !state.dashboardLoadingState;
-    },
-
     setTaskAsDone(state, payload) {
         const task = state.tasks.find(task => {
             return task.id === payload;
@@ -53,4 +49,10 @@ export default {
     setDraggedTask(state, payload) {
         state.draggedTask = payload;
     },
+
+    resetColumnsColor(state) {
+        state.allColumns.forEach(column => {
+            document.getElementById(column).style.background = 'white';
+        });
+    }
 };
