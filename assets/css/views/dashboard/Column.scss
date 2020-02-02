@@ -7,8 +7,6 @@
   width: 25%;
   padding: 10px;
   margin: 0 10px;
-  position: relative;
-  z-index: 100;
   transition: all 0.3s linear;
 }
 
@@ -26,5 +24,4 @@
 .Column-tasks {
   display: flex;
   flex-direction: column;
-  position: relative;
 }

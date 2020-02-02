@@ -1,15 +1,15 @@
-.Textarea {
+.Input {
   display: grid;
   grid-auto-columns: auto;
   position: relative;
 
-  .Textarea-value {
+  .Input-value {
     -webkit-appearance: none;
     border: none;
     padding: 5px 10px;
     font-size: 20px;
     font-weight: 400;
-    box-shadow: 0 0 10px 0 rgba(219, 219, 219, 1);;
+    box-shadow: 0 0 10px 0 rgba(219, 219, 219, 1);
     width: 100%;
 
     &:focus {
@@ -23,7 +23,7 @@
     }
   }
 
-  .Textarea-name {
+  .Input-name {
     font-size: 14px;
     padding: 5px 10px;
     color: #5A667F;

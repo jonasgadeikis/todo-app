@@ -6,8 +6,7 @@ export default {
         axios.post('/api/task/create', {
             description: payload,
         }).then(response => {
-            const data = response.data;
-            commit('setMessage', data);
+            commit('setMessage', response.data);
         }).catch(error => {
             console.log(error);
         }).finally(() => {

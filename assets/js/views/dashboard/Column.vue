@@ -17,14 +17,13 @@
                 @dragStarted="dragStarted($event)"
             >
                 <Button
-                    v-show="state"
                     :classes="[
                         'Button',
-                        stateClass,
+                        classes,
                     ]"
                     :disabled="true"
                 >
-                    <i class="material-icons">{{ stateIcon }}</i>
+                    <i class="material-icons">{{ icon }}</i>
                 </Button>
             </Task>
         </div>
@@ -46,10 +45,8 @@
         name: 'Column',
         props: {
             id: String,
-            state: Boolean,
-            stateIcon: String,
-            stateClass: String,
-            loading: Boolean,
+            icon: String,
+            classes: String,
             tasks: Array,
             title: String,
         },
