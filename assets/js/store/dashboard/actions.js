@@ -55,14 +55,15 @@ export default {
 
     getTask({commit}) {
         commit('toggleDashboardLoadingState');
-        axios.get('/api/task/get').then(response => {
-            const data = response.data;
-            commit('setTasks', data);
-        }).catch(error => {
-            console.log(error);
-        }).finally(() => {
-            commit('toggleDashboardLoadingState');
-        });
+        setTimeout(() => {
+            axios.get('/api/task/get').then(response => {
+                commit('setTasks', response.data);
+            }).catch(error => {
+                console.log(error);
+            }).finally(() => {
+                commit('toggleDashboardLoadingState');
+            });
+        }, 2000);
     },
 
     dragTask({commit}, payload) {

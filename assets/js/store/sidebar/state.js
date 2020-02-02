@@ -11,6 +11,11 @@ export default {
             icon: 'add',
             value: '/create',
         },
+        {
+            name: 'Register',
+            icon: 'person_add',
+            value: '/register',
+        },
         // {
         //     name: 'Search',
         //     icon: 'search',
