@@ -8,9 +8,9 @@
         <div class="Task-content">
             <span class="Dashboard-taskName">{{ task.name }}</span>
             <slot />
-            <div class="Task-loading" v-show="dashboardLoadingState">
-                <Spinner />
-            </div>
+<!--            <div class="Task-loading" v-show="dashboardLoadingState">-->
+<!--                <Spinner />-->
+<!--            </div>-->
         </div>
     </div>
 </template>

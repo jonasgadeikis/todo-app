@@ -1,19 +1,21 @@
 <template>
     <div class="Input">
-        <textarea
+        <input
+            :type="type"
             :class="classes"
             v-model="inputModel"
             :placeholder="placeholder"
             @input="$emit('update:model', inputModel)"
-        />
+        >
         <span class="Input-name">{{ name }}</span>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'Textarea',
+        name: 'Input',
         props: {
+            type: String,
             name: String,
             classes: String,
             placeholder: String,

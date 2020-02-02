@@ -1,15 +1,19 @@
 @import '~material-design-icons/iconfont/material-icons.css';
 @import 'components/Button.scss';
 @import 'components/Spinner.scss';
-@import 'components/Textarea.scss';
+@import 'components/Input.scss';
 @import 'views/Sidebar.scss';
 @import 'views/dashboard/Column.scss';
 @import 'views/dashboard/Dashboard.scss';
 @import 'views/dashboard/Task.scss';
 @import 'views/create/Create.scss';
+@import 'views/register/Register.scss';
+
+body {
+  overflow: hidden;
+}
 
 .App-layout {
-  min-height: 100vh;
-  max-height: 100%;
+  height: 100vh;
   display: flex;
 }

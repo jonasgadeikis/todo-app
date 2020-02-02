@@ -4,7 +4,7 @@
         <Textarea
             placeholder="..."
             name="Task Description"
-            classes="Textarea-value Textarea-value--primary"
+            classes="Input-value Input-value--primary"
             :model.sync="description"
         />
         <Button
