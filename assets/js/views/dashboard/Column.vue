@@ -15,9 +15,7 @@
                 :key="i"
                 :task="task"
                 @dragStarted="dragStarted($event)"
-            >
-<!--                <i class="material-icons" :class="classes">{{ icon }}</i>-->
-            </Task>
+            />
         </div>
     </div>
 </template>

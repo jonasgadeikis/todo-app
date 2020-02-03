@@ -1,12 +1,16 @@
 <template>
     <div class="Input">
         <textarea
+            :maxlength="max"
             :class="classes"
             v-model="inputModel"
             :placeholder="placeholder"
             @input="$emit('update:model', inputModel)"
         />
-        <span class="Input-name">{{ name }}</span>
+        <div class="Input-name">
+            <span>{{ name }}</span>
+            <span>{{ inputModel.length }} / {{ max }}</span>
+        </div>
     </div>
 </template>
 
@@ -18,6 +22,7 @@
             classes: String,
             placeholder: String,
             model: String,
+            max: String,
         },
         data() {
             return {

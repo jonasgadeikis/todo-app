@@ -66,6 +66,14 @@ export default {
         }, 2000);
     },
 
+    reopenTask({commit}, payload) {
+        commit('toggleLoadingState');
+    },
+
+    stopProgress({commit}, payload) {
+        commit('toggleLoadingState');
+    },
+
     dragTask({commit}, payload) {
         commit('setDraggedTask', payload);
     },

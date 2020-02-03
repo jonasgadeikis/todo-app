@@ -7,15 +7,22 @@
     >
         <div class="Task-content">
             <span class="Task-name">
-                <i
-                    class="material-icons"
-                    :class="[ task.priority === 2 ? 'Task-priority--high' : 'Task-priority--low' ]"
-                >
-                    {{ task.priority === 2 ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
-                </i>
-                <span :class="{ 'Task-name--completed': task.isCompleted }">{{ task.description }}</span>
+                <span :class="{ 'Task-name--completed': task.isCompleted }">{{ task.name }}</span>
             </span>
-            <slot />
+            <i
+                class="material-icons"
+                :class="[ task.priority === 2
+                    ? 'Task-priority--high'
+                    : task.priority === 1 ? 'Task-priority--medium'
+                    : 'Task-priority--low'
+                ]"
+            >
+                {{ task.priority === 2
+                    ? 'keyboard_arrow_up'
+                    : task.priority === 1 ? 'remove'
+                    : 'keyboard_arrow_down'
+                }}
+            </i>
         </div>
     </div>
 </template>

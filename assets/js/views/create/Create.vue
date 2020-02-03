@@ -1,17 +1,30 @@
 <template>
     <div class="Create pt-5">
         <h1 class="Create-title mb-5">New Task</h1>
-        <Textarea
+        <Input
+            type="text"
+            name="Name"
             placeholder="..."
-            name="Task Description"
+            max="50"
             classes="Input-value Input-value--primary"
-            :model.sync="task.description"
+            :model.sync="task.name"
         />
-        <Select
-            name="Priority"
-            :items="priorities"
-            :model.sync="task.priority"
-        />
+        <div class="mt-3">
+            <Textarea
+                placeholder="..."
+                name="Description"
+                max="250"
+                classes="Input-value Input-value--primary"
+                :model.sync="task.description"
+            />
+        </div>
+        <div class="mt-3">
+            <Select
+                name="Priority"
+                :items="priorities"
+                :model.sync="task.priority"
+            />
+        </div>
         <Button
             :classes="[
                 'Button mt-3',
@@ -22,6 +35,7 @@
             <i class="material-icons">check</i>
             <span class="ml-2">Save</span>
         </Button>
+
         <div class="Create-message--success mt-3">{{ message }}</div>
 
         <Spinner :loading="loadingState" />
@@ -34,10 +48,12 @@
     import Button from '../../components/Button';
     import Select from '../../components/Select';
     import Spinner from '../../components/Spinner';
+    import Input from '../../components/Input';
 
     export default {
         name: 'Create',
         components: {
+            Input,
             Button,
             Textarea,
             Select,
@@ -46,12 +62,17 @@
         data() {
             return {
                 task: {
+                    name: null,
                     description: null,
-                    priority: 1,
+                    priority: 0,
                 },
                 priorities: [
                     {
                         name: 'Low',
+                        value: 0,
+                    },
+                    {
+                        name: 'Medium',
                         value: 1,
                     },
                     {

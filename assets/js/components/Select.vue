@@ -25,13 +25,12 @@
         name: 'Select',
         data() {
             return {
-                selectModel: 1,
+                selectModel: 0,
             }
         },
         props: {
             items: Array,
             name: String,
-
-        }
+        },
     }
 </script>
