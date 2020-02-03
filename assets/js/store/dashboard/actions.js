@@ -57,14 +57,21 @@ export default {
         commit('toggleLoadingState');
         setTimeout(() => {
             axios.get('/api/task/get').then(response => {
-                const data = response.data;
-                commit('setTasks', data);
+                commit('setTasks', response.data);
             }).catch(error => {
                 console.log(error);
             }).finally(() => {
                 commit('toggleLoadingState');
             });
         }, 2000);
+    },
+
+    reopenTask({commit}, payload) {
+        commit('toggleLoadingState');
+    },
+
+    stopProgress({commit}, payload) {
+        commit('toggleLoadingState');
     },
 
     dragTask({commit}, payload) {

@@ -10,7 +10,7 @@
                 id="toDo"
                 title="To Do"
                 icon="play_arrow"
-                classes="Button--taskCompleted"
+                classes="Column-state"
                 :tasks="toDoTasks"
             />
 
@@ -18,7 +18,7 @@
                 id="inProgress"
                 title="In Progress"
                 icon="check"
-                classes="Button--taskBlocked"
+                classes="Column-state"
                 :tasks="inProgressTasks"
                 @start="startTask($event)"
                 @unblock="unblockTask($event)"
@@ -28,7 +28,7 @@
                 id="completed"
                 title="Completed"
                 icon="check"
-                classes="Button--taskCompleted"
+                classes="Column-state"
                 :tasks="completedTasks"
                 @complete="completeTask($event)"
             />
@@ -37,7 +37,7 @@
                 id="blocked"
                 title="Blocked"
                 icon="block"
-                classes="Button--taskBlocked"
+                classes="Column-state"
                 :tasks="blockedTasks"
                 @block="blockTask($event)"
             />

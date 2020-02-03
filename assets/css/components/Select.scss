@@ -1,0 +1,49 @@
+@import '../colors.scss';
+@import '../animations.scss';
+
+.Select {
+  display: grid;
+  grid-auto-columns: auto;
+
+  .Select-block {
+    position: relative;
+  }
+
+  .Select-value {
+    -webkit-appearance: none;
+    border: none;
+    background: none;
+    padding: 5px 10px;
+    font-size: 20px;
+    font-weight: 400;
+    width: 100%;
+    box-shadow: 0 0 10px 0 $color-shadow;
+
+    &:focus {
+      outline: none;
+      border-bottom: 3px solid $color-secondary;
+      transition: all 0.3s linear;
+    }
+
+    &--primary {
+      border-bottom: 3px solid $color-primary;
+    }
+  }
+
+  .Select-icon {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+
+    &--primary {
+      color: $color-primary;
+    }
+  }
+
+  .Select-name {
+    font-size: 14px;
+    padding: 5px 10px;
+    color: $color-text;
+  }
+}

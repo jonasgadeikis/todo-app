@@ -15,17 +15,7 @@
                 :key="i"
                 :task="task"
                 @dragStarted="dragStarted($event)"
-            >
-                <Button
-                    :classes="[
-                        'Button',
-                        classes,
-                    ]"
-                    :disabled="true"
-                >
-                    <i class="material-icons">{{ icon }}</i>
-                </Button>
-            </Task>
+            />
         </div>
     </div>
 </template>

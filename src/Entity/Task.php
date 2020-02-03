@@ -41,6 +41,16 @@ class Task
      */
     private $createdAt;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $priority;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $name;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -107,6 +117,30 @@ class Task
     public function setIsInProgress(bool $isInProgress): self
     {
         $this->isInProgress = $isInProgress;
+
+        return $this;
+    }
+
+    public function getPriority(): ?int
+    {
+        return $this->priority;
+    }
+
+    public function setPriority(int $priority): self
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

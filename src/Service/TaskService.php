@@ -28,7 +28,9 @@ class TaskService
     public function create($data)
     {
         $task = new Task();
+        $task->setName($data['name']);
         $task->setDescription($data['description']);
+        $task->setPriority($data['priority']);
 
         return $this->taskRepository->save($task);
     }
@@ -44,7 +46,9 @@ class TaskService
         foreach ($tasks as $task) {
             $data[] = [
                 'id' => $task->getId(),
-                'name' => $task->getDescription(),
+                'name' => $task->getName(),
+                'description' => $task->getDescription(),
+                'priority' => $task->getPriority(),
                 'isInProgress' => $task->getIsInProgress(),
                 'isCompleted' => $task->getIsCompleted(),
                 'isBlocked' => $task->getIsBlocked(),
