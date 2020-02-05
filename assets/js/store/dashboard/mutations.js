@@ -56,6 +56,16 @@ export default {
         state.tasks.push(task);
     },
 
+    setTaskAsStopped(state, payload) {
+        const task = state.tasks.find(task => {
+            return task.id === payload;
+        });
+
+        state.tasks.splice(state.tasks.indexOf(task), 1);
+        task.isInProgress = false;
+        state.tasks.push(task);
+    },
+
     setDraggedTask(state, payload) {
         state.draggedTask = payload;
     },

@@ -13,6 +13,7 @@
                 classes="Column-state"
                 :tasks="toDoTasks"
                 @reopen="reopenTask($event)"
+                @stop="stopTask($event)"
             />
 
             <Column
@@ -72,6 +73,7 @@
                 'unblockTask',
                 'getTask',
                 'reopenTask',
+                'stopTask',
                 'resetColumnsColor',
             ]),
         },

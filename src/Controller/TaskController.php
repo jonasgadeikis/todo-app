@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Task;
 use App\Service\TaskService;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -121,6 +122,22 @@ class TaskController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
         $response = $taskService->reopen($data);
+
+        return $this->json($response);
+    }
+
+    /**
+     * @Route("/stop", name="stop")
+     * @param Request $request
+     * @param TaskService $taskService
+     * @return JsonResponse
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function stopTask(Request $request, TaskService $taskService)
+    {
+        $data = json_decode($request->getContent(), true);
+        $response = $taskService->stop($data);
 
         return $this->json($response);
     }

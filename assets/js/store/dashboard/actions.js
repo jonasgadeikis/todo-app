@@ -70,17 +70,26 @@ export default {
         commit('toggleLoadingState');
         axios.post('/api/task/reopen', {
             taskId: payload
-        }).then(response => {
+        }).then(() => {
             commit('setTaskAsReopened', payload);
         }).catch(error => {
             console.log(error);
         }).finally(() => {
             commit('toggleLoadingState');
-        })
+        });
     },
 
-    stopProgress({commit}, payload) {
+    stopTask({commit}, payload) {
         commit('toggleLoadingState');
+        axios.post('/api/task/stop', {
+            taskId: payload
+        }).then(() => {
+            commit('setTaskAsStopped', payload);
+        }).catch(error => {
+            console.log(error);
+        }).finally(() => {
+            commit('toggleLoadingState');
+        });
     },
 
     dragTask({commit}, payload) {
@@ -93,7 +102,7 @@ export default {
 
     showAvailableColumns({commit}, payload) {
         payload.available.forEach(column => {
-            document.getElementById(column).style.background = '#1dd1a175';
+            document.getElementById(column).style.background = '#1DD1A175';
         });
     },
 };
