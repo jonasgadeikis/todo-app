@@ -130,4 +130,18 @@ class TaskService
 
         return $this->taskRepository->save($task);
     }
+
+    /**
+     * @param $data
+     * @return array
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function stop($data)
+    {
+        $task = $this->taskRepository->find($data['taskId']);
+        $task->setIsInProgress(false);
+
+        return $this->taskRepository->save($task);
+    }
 }

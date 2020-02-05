@@ -50,7 +50,6 @@
                 const column = this.columns.find(column => {
                     return column.name === this.id;
                 });
-
                 this.showAvailableColumns(column);
 
                 const task = {
@@ -81,6 +80,8 @@
                     this.$emit('unblock', Number(this.draggedTask.id));
                 } else if (this.id === 'toDo' && this.draggedTask.start === 'completed') {
                     this.$emit('reopen', Number(this.draggedTask.id));
+                } else if (this.id === 'toDo' && this.draggedTask.start === 'inProgress') {
+                    this.$emit('stop', Number(this.draggedTask.id));
                 }
             },
         },
