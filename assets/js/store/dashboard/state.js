@@ -7,10 +7,6 @@ export default {
             available: [
                 'inProgress',
             ],
-            unavailable: [
-                'completed',
-                'blocked',
-            ],
         },
         {
             name: 'inProgress',
@@ -18,26 +14,17 @@ export default {
                 'completed',
                 'blocked',
             ],
-            unavailable: [],
         },
         {
             name: 'completed',
             available: [
                 'toDo',
             ],
-            unavailable: [
-                'inProgress',
-                'blocked',
-            ],
         },
         {
             name: 'blocked',
             available: [
                 'inProgress',
-            ],
-            unavailable: [
-                'toDo',
-                'completed',
             ],
         },
     ],
