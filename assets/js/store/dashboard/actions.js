@@ -68,6 +68,15 @@ export default {
 
     reopenTask({commit}, payload) {
         commit('toggleLoadingState');
+        axios.post('/api/task/reopen', {
+            taskId: payload
+        }).then(response => {
+            commit('setTaskAsReopened', payload);
+        }).catch(error => {
+            console.log(error);
+        }).finally(() => {
+            commit('toggleLoadingState');
+        })
     },
 
     stopProgress({commit}, payload) {
@@ -80,5 +89,11 @@ export default {
 
     resetColumnsColor({commit}) {
         commit('resetColumnsColor');
+    },
+
+    showAvailableColumns({commit}, payload) {
+        payload.available.forEach(column => {
+            document.getElementById(column).style.background = '#1dd1a175';
+        });
     },
 };

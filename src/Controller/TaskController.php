@@ -108,4 +108,20 @@ class TaskController extends AbstractController
 
         return $this->json($response);
     }
+
+    /**
+     * @Route("/reopen", name="reopen")
+     * @param Request $request
+     * @param TaskService $taskService
+     * @return JsonResponse
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function reopenTask(Request $request, TaskService $taskService)
+    {
+        $data = json_decode($request->getContent(), true);
+        $response = $taskService->reopen($data);
+
+        return $this->json($response);
+    }
 }

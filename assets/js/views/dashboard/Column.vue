@@ -44,17 +44,14 @@
             ...mapActions([
                 'dragTask',
                 'resetColumnsColor',
+                'showAvailableColumns',
             ]),
             dragStarted(e) {
                 const column = this.columns.find(column => {
                     return column.name === this.id;
                 });
-                column.unavailable.forEach(column => {
-                    document.getElementById(column).style.background = '#f15f7945';
-                });
-                column.available.forEach(column => {
-                    document.getElementById(column).style.background = '#1dd1a175';
-                });
+
+                this.showAvailableColumns(column);
 
                 const task = {
                     id: e.target.id,
@@ -82,6 +79,8 @@
                     this.$emit('block', Number(this.draggedTask.id));
                 } else if (this.id === 'inProgress' && this.draggedTask.start === 'blocked') {
                     this.$emit('unblock', Number(this.draggedTask.id));
+                } else if (this.id === 'toDo' && this.draggedTask.start === 'completed') {
+                    this.$emit('reopen', Number(this.draggedTask.id));
                 }
             },
         },

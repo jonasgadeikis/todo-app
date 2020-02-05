@@ -46,6 +46,16 @@ export default {
         state.tasks.push(task);
     },
 
+    setTaskAsReopened(state, payload) {
+        const task = state.tasks.find(task => {
+            return task.id === payload;
+        });
+
+        state.tasks.splice(state.tasks.indexOf(task), 1);
+        task.isCompleted = false;
+        state.tasks.push(task);
+    },
+
     setDraggedTask(state, payload) {
         state.draggedTask = payload;
     },
@@ -54,5 +64,5 @@ export default {
         state.allColumns.forEach(column => {
             document.getElementById(column).style.background = 'white';
         });
-    }
+    },
 };

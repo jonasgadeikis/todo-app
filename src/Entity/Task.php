@@ -42,7 +42,7 @@ class Task
     private $createdAt;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", options={"comment": "0 - Low, 1 - Medium, 2 - High"})
      */
     private $priority;
 

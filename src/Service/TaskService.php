@@ -109,9 +109,24 @@ class TaskService
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function start($data) {
+    public function start($data)
+    {
         $task = $this->taskRepository->find($data['taskId']);
         $task->setIsInProgress(true);
+
+        return $this->taskRepository->save($task);
+    }
+
+    /**
+     * @param $data
+     * @return array
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function reopen($data)
+    {
+        $task = $this->taskRepository->find($data['taskId']);
+        $task->setIsCompleted(false);
 
         return $this->taskRepository->save($task);
     }
