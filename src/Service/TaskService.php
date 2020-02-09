@@ -36,11 +36,12 @@ class TaskService
     }
 
     /**
+     * @param $data
      * @return array
      */
-    public function get()
+    public function get($data)
     {
-        $tasks = $this->taskRepository->findAll();
+        $tasks = $this->taskRepository->findBy(['board' => $data]);
         $data = [];
 
         foreach ($tasks as $task) {

@@ -4,6 +4,7 @@ import Authentication from './authentication/index';
 import Dashboard from './dashboard/index';
 import Create from './create/index';
 import Sidebar from './sidebar/index';
+import Boards from './boards/index';
 
 Vue.use(Vuex);
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
         Dashboard,
         Sidebar,
         Create,
+        Boards,
     },
     state: {
         loadingState: false,

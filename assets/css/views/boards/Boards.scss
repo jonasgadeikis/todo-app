@@ -1,0 +1,57 @@
+@import '../../colors.scss';
+
+.Boards {
+  padding: 20px;
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.Boards-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Boards-title {
+  color: $color-title;
+  margin: 0;
+}
+
+.Boards-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.Boards-listItem {
+  padding: 15px;
+  margin: 10px 0;
+  background-color: white;
+  box-shadow: 0 0 10px 0 $color-shadow;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  color: $color-text;
+
+  i {
+    font-size: 18px;
+    color: $color-primary;
+  }
+
+  &:hover {
+    box-shadow: 0 0 10px 0 #909090;
+    transition: all 0.3s linear;
+
+    i {
+      color: $color-secondary;
+      transition: all 0.3s linear;
+    }
+  }
+}
+
+.Boards-listItemTitle {
+  color: $color-text;
+}

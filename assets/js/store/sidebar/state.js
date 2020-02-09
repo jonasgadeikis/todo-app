@@ -2,10 +2,15 @@ export default {
     activeLink: null,
     links: [
         {
-            name: 'Dashboard',
-            icon: 'folder',
-            value: '/dashboard',
+            name: 'Boards',
+            icon: 'dashboard',
+            value: '/boards',
         },
+        // {
+        //     name: 'Dashboard',
+        //     icon: 'folder',
+        //     value: '/dashboard',
+        // },
         {
             name: 'Create Task',
             icon: 'add',
