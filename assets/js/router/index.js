@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home';
 import Dashboard from '../views/dashboard/Dashboard';
 import Create from '../views/create/Create';
+import Boards from '../views/boards/Boards';
 
 Vue.use(VueRouter);
 
@@ -12,12 +13,16 @@ const routes = [
         component: Home,
     },
     {
-        path: '/dashboard',
+        path: '/board/:id',
         component: Dashboard,
     },
     {
         path: '/create',
         component: Create,
+    },
+    {
+        path: '/boards',
+        component: Boards,
     },
 ];
 

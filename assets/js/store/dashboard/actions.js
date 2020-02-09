@@ -1,4 +1,5 @@
 import axios from 'axios';
+import router from '../../router';
 
 export default {
     completeTask({commit}, payload) {
@@ -53,11 +54,17 @@ export default {
         });
     },
 
-    getTask({commit}) {
+    getTask({commit}, payload) {
         commit('toggleLoadingState');
         setTimeout(() => {
-            axios.get('/api/task/get').then(response => {
+            axios.get('/api/task/get', {
+                params: {
+                    board: payload.id,
+                }
+            }).then(response => {
                 commit('setTasks', response.data);
+                commit('setActiveBoard', payload.name);
+                router.push('/board/' + payload.id);
             }).catch(error => {
                 console.log(error);
             }).finally(() => {

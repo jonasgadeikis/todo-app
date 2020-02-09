@@ -1,6 +1,6 @@
 <template>
     <div class="Dashboard pt-5">
-        <h1 class="Dashboard-title">Dashboard</h1>
+        <h1 class="Dashboard-title">{{ activeBoard }}</h1>
 
         <div
             class="Dashboard-columns mt-5"
@@ -62,9 +62,6 @@
             Column,
             Spinner,
         },
-        mounted() {
-            this.getTask();
-        },
         methods: {
             ...mapActions([
                 'startTask',
@@ -84,6 +81,7 @@
                 'completedTasks',
                 'blockedTasks',
                 'loadingState',
+                'activeBoard',
             ]),
         },
     }

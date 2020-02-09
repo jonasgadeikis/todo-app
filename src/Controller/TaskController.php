@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Task;
 use App\Service\TaskService;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -36,12 +35,14 @@ class TaskController extends AbstractController
 
     /**
      * @Route("/get", name="get")
+     * @param Request $request
      * @param TaskService $taskService
      * @return array|string
      */
-    public function getTask(TaskService $taskService)
+    public function getTask(Request $request, TaskService $taskService)
     {
-        $response = $taskService->get();
+        $data = $request->query->get('board');
+        $response = $taskService->get($data);
 
         return $this->json($response);
     }

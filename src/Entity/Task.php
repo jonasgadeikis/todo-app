@@ -47,9 +47,15 @@ class Task
     private $priority;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, columnDefinition="VARCHAR NOT NULL AFTER `id`")
      */
     private $name;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Board")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $board = 1;
 
     public function __construct()
     {
@@ -141,6 +147,18 @@ class Task
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getBoard(): ?Board
+    {
+        return $this->board;
+    }
+
+    public function setBoard(?Board $board): self
+    {
+        $this->board = $board;
 
         return $this;
     }

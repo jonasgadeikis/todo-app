@@ -30,7 +30,7 @@
 .Task-name {
   display: flex;
   align-items: start;
-  color: #5A667F;
+  color: $color-text;
   padding-left: 5px;
 
   &--completed {
